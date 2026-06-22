@@ -270,7 +270,7 @@ app.registerExtension({
 
 
 const original_queuePrompt = api.queuePrompt;
-async function queuePrompt_with_widget_idxs(number, { output, workflow }) {
+async function queuePrompt_with_widget_idxs(number, { output, workflow }, options) {
 	workflow.widget_idx_map = {};
 
 	for(let i in app.graph._nodes_by_id) {
@@ -289,7 +289,7 @@ async function queuePrompt_with_widget_idxs(number, { output, workflow }) {
 		}
 	}
 
-	return await original_queuePrompt.call(api, number, { output, workflow });
+	return await original_queuePrompt.call(api, number, { output, workflow }, options);
 }
 
 api.queuePrompt = queuePrompt_with_widget_idxs;
